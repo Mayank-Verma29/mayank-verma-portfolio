@@ -1,0 +1,1 @@
+Replace this file with your resume PDF and name it resume.pdf. The Download Resume button expects assets/resume.pdf.

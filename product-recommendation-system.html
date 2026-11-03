@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Product Recommendation System case study by Mayank Verma using Python, pandas, SciPy, cosine similarity and Streamlit.">
+<title>Product Recommendation System | Mayank Verma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/project.css">
+<style>
+.reco-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0}
+.reco-step{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:18px 12px;text-align:center}
+.reco-step b{display:block;color:var(--accent-bright);font:600 1.05rem var(--font-heading);margin-bottom:7px}
+.reco-step span{color:var(--muted);font-size:.78rem}
+.callout{border-left:3px solid var(--accent-bright);padding:15px 18px;background:rgba(108,140,255,.07);color:var(--muted);border-radius:0 7px 7px 0;margin-top:20px}
+@media(max-width:700px){.reco-flow{grid-template-columns:1fr 1fr}.reco-step:last-child{grid-column:span 2}}
+</style>
+</head>
+<body>
+<header class="site-header"><nav class="nav container"><a class="logo" href="index.html">MV<span>.</span></a>
+<div class="nav-links"><a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#skills">Skills</a><a class="active" href="index.html#projects">Projects</a><a href="index.html#contact">Contact</a></div></nav></header>
+<main>
+<section class="case-hero container"><a class="back-link" href="index.html#projects">← Back to all projects</a>
+<p class="eyebrow">MACHINE LEARNING / CASE STUDY 04</p><h1>Product Recommendation <span>System.</span></h1>
+<p class="case-intro">A product-to-product recommendation prototype built from e-commerce order history. The notebook transforms customer purchases into an interaction matrix, measures product similarity with cosine similarity and prepares a Streamlit interface for exploring recommendations.</p>
+<div class="tags"><span>Python</span><span>Pandas</span><span>NumPy</span><span>SciPy</span><span>Scikit-learn</span><span>Streamlit</span></div></section>
+
+<section class="container case-section"><div class="case-panel"><p class="eyebrow">01 / PROJECT OVERVIEW</p><h2>Help shoppers discover related products.</h2>
+<p>The project uses the Olist e-commerce dataset. Orders, order items and product metadata are combined to create customer–product purchase interactions. Products with similar customer purchase patterns are compared to generate product recommendations.</p></div></section>
+
+<section class="container case-section"><p class="eyebrow">02 / WORKFLOW</p><h2 class="case-heading">From raw orders to recommendations.</h2>
+<div class="reco-flow"><div class="reco-step"><b>01 · Load</b><span>Orders, order items and products</span></div><div class="reco-step"><b>02 · Merge</b><span>Join on order and product IDs</span></div><div class="reco-step"><b>03 · Prepare</b><span>Clean purchase pairs and filter rare activity</span></div><div class="reco-step"><b>04 · Compare</b><span>Sparse matrix + cosine similarity</span></div><div class="reco-step"><b>05 · Recommend</b><span>Rank similar products for selection</span></div></div>
+</section>
+
+<section class="container case-section"><div class="case-grid">
+<article class="case-panel"><p class="eyebrow">03 / DATA PREPARATION</p><h2>Build purchase interactions.</h2><ul><li>Load orders, order items and product metadata.</li><li>Merge orders with order items using <code>order_id</code>.</li><li>Merge product details using <code>product_id</code>.</li><li>Keep customer and product identifiers, remove missing and duplicate pairs.</li><li>Create a binary <code>purchase = 1</code> interaction indicator.</li><li>Filter products with fewer than 10 purchases and customers with fewer than 3 purchases.</li></ul></article>
+<article class="case-panel"><p class="eyebrow">04 / RECOMMENDATION METHOD</p><h2>Item-based collaborative filtering.</h2><ul><li>Encode customer and product IDs as category codes.</li><li>Build a SciPy CSR sparse customer–product matrix.</li><li>Transpose the matrix so products become rows.</li><li>Calculate product-to-product cosine similarity.</li><li>Sort similarity scores and select the five nearest products, excluding the selected product itself.</li><li>Translate product category labels from Portuguese to English for display.</li></ul></article>
+</div></section>
+
+<section class="container case-section"><p class="eyebrow">05 / TOOLS & CONCEPTS</p><h2 class="case-heading">What the project demonstrates.</h2>
+<div class="sql-tags"><span>Python</span><span>Pandas</span><span>NumPy</span><span>SciPy CSR Matrix</span><span>Cosine Similarity</span><span>Collaborative Filtering</span><span>Sparse Data</span><span>Data Cleaning</span><span>Streamlit</span><span>Seaborn Heatmap</span></div>
+</section>
+
+<section class="container case-section"><p class="eyebrow">06 / EXPLORATION & OUTPUTS</p><h2 class="case-heading">Inspecting similarity and product patterns.</h2>
+<div class="visual-list">
+<article><span class="visual-index">01</span><div><h3>Product similarity heatmap</h3><p>A heatmap is created from a 10-by-10 slice of the product similarity matrix to inspect similarity values between products.</p></div></article>
+<article><span class="visual-index">02</span><div><h3>Frequently purchased products</h3><p>The notebook sums purchase interactions by product and plots the ten highest counts. The displayed output includes garden tools, bed-bath-table and watches-gifts categories.</p></div></article>
+<article><span class="visual-index">03</span><div><h3>Top-five similar products</h3><p>The recommendation function sorts the selected product's similarity scores and returns up to five related product categories.</p></div></article>
+<article><span class="visual-index">04</span><div><h3>Streamlit interface</h3><p>The notebook generates a Streamlit app with a product selector and a Recommend button to display recommendations.</p></div></article>
+</div></section>
+
+<section class="container case-section"><p class="eyebrow">07 / IMPLEMENTATION NOTE</p><h2 class="case-heading">Current prototype scope.</h2>
+<p class="case-copy">The notebook output shows 102,425 distinct customer–product purchase pairs after the initial merge and cleaning, followed by a much smaller filtered interaction set of 114 rows after applying the minimum-purchase thresholds. The Streamlit code shown in the notebook displays English product-category labels as selectable items and recommendations, rather than human-readable product names or SKU-level product cards.</p>
+<div class="callout"><strong>Transparency:</strong> This is a learning/prototype project based on purchase co-occurrence patterns. The supplied notebook does not report offline recommendation metrics (such as Precision@K, Recall@K or MAP@K), a train/test evaluation, or measured business impact. These are sensible next improvements, not results claimed by this project.</div>
+</section>
+
+<section class="container case-section"><p class="eyebrow">08 / NEXT IMPROVEMENTS</p><h2 class="case-heading">How this could be strengthened.</h2>
+<ul class="recommendations"><li>Retain product IDs alongside readable product names and category labels in the app.</li><li>Review the filtering thresholds and resulting 114-row interaction set to ensure sufficient coverage.</li><li>Evaluate recommendations using a held-out interaction set and ranking metrics such as Precision@K and Recall@K.</li><li>Compare item-based collaborative filtering with a popularity baseline and category-based recommendations.</li><li>Persist and load the similarity artifact and product lookup table as reproducible app assets.</li></ul></section>
+
+<section class="container case-section final-case"><p class="eyebrow">09 / PROJECT FILE</p><h2 class="case-heading">Explore the implementation.</h2>
+<p class="case-copy">The original Jupyter Notebook contains the data preparation, similarity calculation, exploratory visualizations and Streamlit app-generation code.</p>
+<div class="download-row"><a class="button button-primary" href="assets/product-recommendation-system/E-Commerce_Recommendation_System_Code.ipynb" download>Download Jupyter Notebook ↓</a>
+<a class="button button-secondary" href="assets/product-recommendation-system/E-commerce_recommendation_app.py" download>Download Streamlit App Code ↓</a>
+<a class="button button-secondary" href="index.html#projects">Back to Portfolio ↗</a></div>
+</section>
+</main>
+<footer class="footer"><div class="container footer-inner"><a class="logo" href="index.html">MV<span>.</span></a><p>Designed & built by Mayank Verma</p><a href="#">Back to top ↑</a></div></footer>
+</body></html>

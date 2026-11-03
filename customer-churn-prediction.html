@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Customer Churn Prediction project by Mayank Verma using Python and machine learning.">
+<title>Customer Churn Prediction | Mayank Verma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/project.css"></head><body>
+<header class="site-header"><nav class="nav container"><a class="logo" href="index.html">MV<span>.</span></a><div class="nav-links"><a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#skills">Skills</a><a class="active" href="index.html#projects">Projects</a><a href="index.html#contact">Contact</a></div></nav></header>
+<main><section class="case-hero container"><a class="back-link" href="index.html#projects">← Back to all projects</a><p class="eyebrow">MACHINE LEARNING / CASE STUDY 03</p>
+<h1>Customer Churn <span>Prediction.</span></h1><p class="case-intro">Using customer profile, tenure, contract and billing information to explore churn patterns, engineer features and compare classification models that predict whether a customer may leave.</p>
+<div class="tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Logistic Regression</span><span>Streamlit</span></div></section>
+
+<section class="container case-section"><div class="case-grid"><article class="case-panel"><p class="eyebrow">01 / PROJECT OVERVIEW</p><h2>Understanding customer retention risk</h2><p>This project uses a synthetic customer dataset with 100,000 records to study churn behaviour and build a binary classification model. The workflow includes exploratory data analysis, feature engineering, preprocessing, model training and evaluation.</p></article>
+<article class="case-panel"><p class="eyebrow">02 / BUSINESS QUESTIONS</p><h2>Questions explored</h2><ul><li>How is churn distributed in the dataset?</li><li>How do contract type, monthly charges and tenure relate to churn?</li><li>Can engineered customer features help classification?</li><li>How do Logistic Regression, Decision Tree and Random Forest compare?</li><li>Can a simple app accept customer details and return a prediction?</li></ul></article></div></section>
+
+<section class="container case-section"><p class="eyebrow">03 / DATASET SNAPSHOT</p><h2 class="case-heading">100,000 customer records.</h2><div class="metric-grid">
+<div class="metric"><strong>100K</strong><span>Customer records</span></div><div class="metric"><strong>9</strong><span>Original dataset fields</span></div><div class="metric"><strong>33.14%</strong><span>Churn label share</span></div><div class="metric"><strong>0</strong><span>Missing values in source CSV</span></div></div>
+<p class="case-copy">The original synthetic dataset contains CustomerID, Age, Gender, Tenure, MonthlyCharges, Contract, PaymentMethod, TotalCharges and Churn. The cleaned dataset adds AvgMonthlySpend, Tenure_Group, Is_a_Long_Contract and High_Charges, along with an exported index column. The churn labels are No (66,856) and Yes (33,144).</p>
+<p class="data-note">Dataset note: the supplied data is synthetic. Results demonstrate a machine-learning workflow and should not be presented as measured outcomes from a real telecom company.</p></section>
+
+<section class="container case-section"><p class="eyebrow">04 / EXPLORATORY DATA ANALYSIS</p><h2 class="case-heading">Patterns explored in the notebook.</h2><div class="visual-list">
+<article><span class="visual-index">01</span><div><h3>Churn distribution</h3><p>Count plot to compare customers labelled as churned and retained.</p></div></article>
+<article><span class="visual-index">02</span><div><h3>Gender and churn</h3><p>The notebook notes that churn appears similar across gender categories, suggesting gender is not a strong signal in this dataset.</p></div></article>
+<article><span class="visual-index">03</span><div><h3>Contract type</h3><p>Month-to-month customers have a higher churn share in the supplied data than customers on one- or two-year contracts.</p></div></article>
+<article><span class="visual-index">04</span><div><h3>Monthly charges and tenure</h3><p>Boxplots compare these numeric features across churn labels. The notebook identifies higher charges and lower tenure as potential churn-associated patterns.</p></div></article>
+</div></section>
+
+<section class="container case-section"><p class="eyebrow">05 / FEATURE ENGINEERING & MODELLING</p><h2 class="case-heading">Preparing data for prediction.</h2>
+<div class="case-panel"><p class="case-copy">The notebook creates average monthly spend (TotalCharges divided by Tenure, replacing zero tenure with one), groups tenure into New (up to 12 months), Mid-term (13–36 months) and Long-term (over 36 months), flags non-month-to-month contracts, and marks monthly charges of at least 70 as high charges.</p>
+<p class="case-copy">A train/test split uses 80% training data and 20% test data (random_state=42). Numeric fields are standardised with StandardScaler and categorical fields are encoded with OneHotEncoder(handle_unknown="ignore"), combined through ColumnTransformer and Pipeline.</p></div>
+<div class="sql-tags"><span>EDA</span><span>Feature Engineering</span><span>StandardScaler</span><span>OneHotEncoder</span><span>ColumnTransformer</span><span>Train/Test Split</span><span>Classification</span></div></section>
+
+<section class="container case-section"><p class="eyebrow">06 / MODEL EVALUATION</p><h2 class="case-heading">Comparing three classifiers.</h2>
+<div class="metric-grid"><div class="metric"><strong>75.31%</strong><span>Logistic Regression accuracy</span></div><div class="metric"><strong>73.28%</strong><span>Random Forest accuracy</span></div><div class="metric"><strong>68.10%</strong><span>Decision Tree accuracy</span></div><div class="metric"><strong>0.58</strong><span>Logistic Regression churn F1</span></div></div>
+<div class="case-panel"><h3>Logistic Regression — test-set classification report</h3><p class="case-copy">For the churn class (Yes): precision 0.67, recall 0.51 and F1-score 0.58, with 6,706 churn-labelled test records. For the non-churn class (No): precision 0.78, recall 0.87 and F1-score 0.82, with 13,294 records.</p><p class="case-copy">Logistic Regression achieved the highest accuracy among the three models in the notebook. Its churn recall of 0.51 means it identified around half of the churn-labelled test cases, so accuracy alone is not sufficient to judge business usefulness.</p></div>
+<p class="data-note">Metrics are copied from the executed notebook's 20,000-row test set. The notebook does not report ROC-AUC, so no ROC-AUC result is claimed here.</p></section>
+
+<section class="container case-section"><p class="eyebrow">07 / STREAMLIT APP</p><h2 class="case-heading">From model to interactive prediction.</h2>
+<p class="case-copy">The supplied Streamlit app collects customer details such as age, tenure, monthly charges, total charges, average monthly spend, gender, contract, payment method and engineered customer flags. On clicking Predict, it passes the entered features to a saved model and displays whether the customer is likely to churn or stay.</p>
+<div class="case-panel"><h3>Run requirement</h3><p class="case-copy">The app loads a file named <code>lr_model.pkl</code> from its working directory. The notebook includes a step that saves the fitted Logistic Regression pipeline to this filename. Keep the generated model file beside the app script before running it.</p></div></section>
+
+<section class="container case-section"><p class="eyebrow">08 / KEY TAKEAWAYS</p><h2 class="case-heading">What this project demonstrates.</h2>
+<ul class="recommendations"><li>Exploratory analysis can reveal how churn labels vary across contract types, tenure and monthly charges.</li><li>Feature engineering adds customer-level indicators that can be used in a predictive workflow.</li><li>Preprocessing numeric and categorical data in a single pipeline keeps transformations consistent between training and prediction.</li><li>Model evaluation should consider churn precision and recall, not accuracy alone, because missed churn cases can matter to retention teams.</li><li>Retention ideas suggested by the patterns — such as reviewing month-to-month plans, onboarding and pricing — should be validated with real customer data before implementation.</li></ul></section>
+
+<section class="container case-section final-case"><p class="eyebrow">09 / PROJECT FILES</p><h2 class="case-heading">Explore the implementation.</h2><p class="case-copy">The files below are the materials supplied for this project.</p>
+<div class="download-row"><a class="button button-primary" href="assets/customer-churn-prediction/Customer_Churn_Prediction.ipynb" download>Download Notebook ↓</a>
+<a class="button button-secondary" href="assets/customer-churn-prediction/Customer_Churn_app.py" download>Streamlit App ↓</a>
+<a class="button button-secondary" href="assets/customer-churn-prediction/synthetic_customer_churn_100k.csv" download>Original Dataset ↓</a>
+<a class="button button-secondary" href="assets/customer-churn-prediction/customer_churn_cleaned.csv" download>Cleaned Dataset ↓</a></div></section></main>
+<footer class="footer"><div class="container footer-inner"><a class="logo" href="index.html">MV<span>.</span></a><p>Designed & built by Mayank Verma</p><a href="#">Back to top ↑</a></div></footer></body></html>
